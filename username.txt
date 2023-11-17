@@ -1,0 +1,8 @@
+Pasien
+Username = adi
+Password = adi12345
+
+
+Admin
+Username = admin
+Password = admin12345
