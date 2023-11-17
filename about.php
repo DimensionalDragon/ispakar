@@ -40,14 +40,14 @@ include 'function.php';
           <ul class="navbar-nav ml-auto">
             <li class="nav-item align-self-center active">
               <a class="nav-link" href="index.php"
-                >Home <span class="sr-only">(current)</span></a
+                >Home</a
               >
             </li>
             <li class="nav-item align-self-center active">
-              <a class="nav-link"  href="#alur">Alur Kerja</a>
+              <a class="nav-link" href="/#alur">Alur Kerja</a>
             </li>
             <li class="nav-item align-self-center active">
-              <a class="nav-link"  href="about.php">Tentang Kami</a>
+              <a class="nav-link"  href="about.php">Tentang Kami <span class="sr-only">(current)</span></a>
             </li>
             
             <li class="nav-item ">
@@ -96,16 +96,69 @@ include 'function.php';
 
     <section class="heroBWA mt-5">
       <div class="container">
-        <div class="row">
+        <div class="row mb-4">
           <div class="col align-self-center">
-            <h1 class="mb-4">ISPAkar</h1>
+            <h1 class="mb-4">Tentang Kami</h1>
             <p class="mb-4">
               "ISPAkar" Merupakan sistem informasi berbasis Web Based yang memanfaatkan teknologi Sistem Pakar didalamnya. Dengan menggunakan sistem pakar ini pengguna dapat mengenali atau memeriksakan keluhan terhadap saluran pernapasan hanya dengan menjawab pertanyaan yang diberikan oleh sistem, dan kemudian pengguna dapat melihat hasil Test.
             </p>
-            <a class="btn btn-primary" href="register.php" role="button">Ayo Mulai!</a>
           </div>
           <div class="col d-none d-sm-block">
             <img width="500" src="gambar/hero1.png" alt="hero" />
+          </div>
+        </div>
+        <div class="row">
+        <div class="col align-self-center">
+            <h1 class="mb-4">Knowledge Base</h1>
+            <p class="mb-4">
+              Saat ini ISPAkar dapat digunakan untuk mendiagnosa 9 jenis penyakit ISPA, yaitu
+            </p>
+            <ul>
+                <li>Bronkitis</li>
+                <li>Sinusitis</li>
+                <li>Bronkiolitis</li>
+                <li>Pneumonia</li>
+                <li>Faringitis</li>
+                <li>Epiglotitis</li>
+                <li>Pleuritis</li>
+                <li>Common Cold</li>
+                <li>ILI (Influenza Like Illness)</li>
+            </ul>
+            <p class="mb-4">
+              Diagnosa penyakit ditentukan berdasarkan gejala-gejala yang dialami user, saat ini ISPAkar memiliki 30 gejala yang dapat dikonsultasikan, yaitu:
+            </p>
+            <ul>
+                <li>Demam</li>
+                <li>Batuk-batuk</li>
+                <li>Hidung tersumbat/Pilek</li>
+                <li>Sakit kepala/Pusing</li>
+                <li>Sakit tenggorokan</li>
+                <li>Susah menelan</li>
+                <li>Badan lemas & lesu</li>
+                <li>Sesak nafas</li>
+                <li>Bersin-bersin</li>
+                <li>Frekuensi nafas cepat</li>
+                <li>Suara nafas kasar</li>
+                <li>Nafsu makan berkurang</li>
+                <li>Suara serak</li>
+                <li>Gelisah</li>
+                <li>Susah tidur</li>
+                <li>Nyeri di dada</li>
+                <li>Berkurangnya kemampuan indra penciuman</li>
+                <li>Wajah terasa nyeri atau tertekan</li>
+                <li>Bau mulut</li>
+                <li>Sakit gigi</li>
+                <li>Nyeri sendi atau nyeri otot</li>
+                <li>Berkeringat dan menggigil</li>
+                <li>Batuk dengan dahak kental berwarna hijau, kuning, atau disertai darah</li>
+                <li>Diare</li>
+                <li>Mual atau muntah</li>
+                <li>Nyeri bahu dan punggung</li>
+                <li>Hidung berair</li>
+                <li>Nyeri telinga</li>
+                <li>Mata berair</li>
+                <li>Dehidrasi</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -114,7 +167,7 @@ include 'function.php';
     <section id="alur">
       <!--Content2-->
       <div id="konten2" class="container konten">
-        <h2 style="font-weight: bold;text-align: center;">Alur Kerja ISPAkar!</h2>
+        <h2 style="font-weight: bold;text-align: center;">Alur Kerja ISPAkar</h2>
         <div class="card-deck">
           <div class="card">
             <h5 class="card-title">Login</h5>
