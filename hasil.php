@@ -38,13 +38,13 @@ function maximum($list_penyakit) {
     href="https://fonts.googleapis.com/css?family=Poppins:300,400,700&display=swap"
     rel="stylesheet"/>
     <link rel="stylesheet" href="custom.css" />
-    <title>Cek Ginjal Yuk!</title>
+    <title>ISPAkar</title>
 </head>
 <body>
     <nav class="navbar py-2 navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#"
-            ><img src="gambar/logo.png" width="147" alt="logo"
+            ><img src="gambar/logo2.png" width="147" alt="logo"
             /></a>
             <button
             class="navbar-toggler"
@@ -116,7 +116,7 @@ function maximum($list_penyakit) {
                 </div>
                     </form>
                 <div class="col d-none d-sm-block">
-                    <img width="500" src="gambar/hasil.png" alt="hero" />
+                    <img width="500" src="gambar/hasil1.jpg" alt="hero" />
                 </div>
             </div>
         </div>

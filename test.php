@@ -29,7 +29,7 @@ if (isset($_SESSION['role'])) {
     <nav class="navbar py-2 navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#"
-            ><img src="gambar/logo1.png" width="80" alt="logo"
+            ><img src="gambar/logo2.png" width="80" alt="logo"
             /></a>
             <button
             class="navbar-toggler"
@@ -172,7 +172,7 @@ if (isset($_SESSION['role'])) {
                 </div>
                     </form>
                 <div class="col d-none d-sm-block">
-                    <img width="500" src="gambar/jawab.png" alt="hero" />
+                    <img width="500" src="gambar/jawab1.jpg" alt="hero" />
                 </div>
             </div>
         </div>
