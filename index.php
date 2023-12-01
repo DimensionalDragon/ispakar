@@ -22,7 +22,7 @@ include 'function.php';
     <nav class="navbar py-2 navbar-expand-lg navbar-light">
       <div class="container">
         <a class="navbar-brand" href="#"
-          ><img src="gambar/logo1.png" width="80" alt="logo"
+          ><img src="gambar/logo2.png" width="80" alt="logo"
         /></a>
         <button
           class="navbar-toggler"
@@ -105,7 +105,7 @@ include 'function.php';
             <a class="btn btn-primary" href="register.php" role="button">Ayo Mulai!</a>
           </div>
           <div class="col d-none d-sm-block">
-            <img width="500" src="gambar/hero1.png" alt="hero" />
+            <img width="500" src="gambar/hero2.jpg" alt="hero" />
           </div>
         </div>
       </div>
@@ -118,7 +118,7 @@ include 'function.php';
         <div class="card-deck">
           <div class="card">
             <h5 class="card-title">Login</h5>
-            <img src="gambar/login.png" class="card-img-top" alt="...">
+            <img src="gambar/login1.jpg" class="card-img-top" alt="...">
             <div class="card-body">
 
               <p class="card-text">Pengguna harus melakukan login sebelum melangkah ke tahap selanjutnya, dan jika belum memiliki akun akan diarahkan ke menu registrasi.</p>
@@ -126,14 +126,14 @@ include 'function.php';
           </div>
           <div class="card">
             <h5 class="card-title">Test Gejala Pasien</h5>
-            <img src="gambar/jawab.png" class="card-img-top" alt="...">
+            <img src="gambar/jawab1.jpg" class="card-img-top" alt="...">
             <div class="card-body">
               <p class="card-text">Dalam tahap ini pengguna akan diberikan beberapa pertanyaan terkait dengan gejala yang dialami.</p>
             </div>
           </div>
           <div class="card">
             <h5 class="card-title">Hasil dan Solusi</h5>
-            <img src="gambar/hasil.png" class="card-img-top" alt="...">
+            <img src="gambar/hasil1.jpg" class="card-img-top" alt="...">
 
             <div class="card-body">
 
