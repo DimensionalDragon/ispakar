@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2023 at 04:23 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.2.0
+-- Waktu pembuatan: 01 Des 2023 pada 12.48
+-- Versi server: 10.4.22-MariaDB
+-- Versi PHP: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `diseases`
+-- Struktur dari tabel `diseases`
 --
 
 CREATE TABLE `diseases` (
@@ -33,7 +33,7 @@ CREATE TABLE `diseases` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `diseases`
+-- Dumping data untuk tabel `diseases`
 --
 
 INSERT INTO `diseases` (`disease_id`, `name`) VALUES
@@ -50,7 +50,7 @@ INSERT INTO `diseases` (`disease_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `diseases_symptoms`
+-- Struktur dari tabel `diseases_symptoms`
 --
 
 CREATE TABLE `diseases_symptoms` (
@@ -59,7 +59,7 @@ CREATE TABLE `diseases_symptoms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `diseases_symptoms`
+-- Dumping data untuk tabel `diseases_symptoms`
 --
 
 INSERT INTO `diseases_symptoms` (`disease_id`, `symptom_id`) VALUES
@@ -157,7 +157,39 @@ INSERT INTO `diseases_symptoms` (`disease_id`, `symptom_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `symptoms`
+-- Struktur dari tabel `solusi`
+--
+
+CREATE TABLE `solusi` (
+  `solusi_id` int(11) NOT NULL,
+  `disease_id` int(11) DEFAULT NULL,
+  `solusi` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `solusi`
+--
+
+INSERT INTO `solusi` (`solusi_id`, `disease_id`, `solusi`) VALUES
+(1, 1, 'Untuk mengurangi gejala bronkitis, Anda dapat mengambil obat seperti: obat pereda demam dan nyeri, seperti paracetamol atau ibuprofen; obat antitusif atau ekspektoran, seperti codeine, dextromethorphan, guaifenesin, dan erdosteine; atau Disarankan untuk memeriksakan ke dokter jika gejala belum hilang dalam beberapa minggu.'),
+(2, 2, 'Untuk meredakan gejala sinusitis, bisa menggunakan obat-obatan tanpa resep dokter. Anda dapat membeli obat pereda nyeri seperti ibuprofen atau paracetamol jika Anda menyebabkan rasa sakit. Obat dekongestan juga dapat membantu mengurangi pembengkakan sinus. Ini akan mengurangi penumpukan lendir dan membuat hidung Anda lebih tenang.'),
+(3, 3, 'Untuk meredakan gejala bronkiolitis yang diderita jika Si Kecil demam, berikan dosis yang disarankan dokter atau petunjuk pemakaian yang tertera pada kemasan obat pereda panas, yang dapat dibeli secara gratis di apotek. Obat pereda panas dapat diberikan pada Si Kecil setelah berusia lebih dari tiga bulan. Obat antiinflamasi ini hanya boleh diberikan kepada individu berusia 16 tahun ke atas.'),
+(4, 4, 'Untuk membantu menurunkan demam dengan mengonsumsi obat pereda rasa nyeri seperti parasetamol atau ibuprofen. Namun, obat pereda rasa sakit tidak disarankan untuk dikonsumsi oleh pengidap pneumonia yang alergi terhadap aspirin atau yang mengidap asma, tukak lambung, dan gangguan hati.'),
+(5, 4, 'Jangan minum obat batuk. Hindari menggunakan obat batuk untuk meredakan gejala batuk karena itu hanyalah cara tubuh mengeluarkan dahak dari paru-paru. Anda bisa meminum air hangat yang dicampur madu dan lemon dapat membantu mengurangi batuk.'),
+(6, 5, 'Obat digunakan untuk menurunkan gejala. Biasanya penggunaan obat kortikosteroid selama 1-2 hari untuk menurunkan risiko gejala, seperti keluhan sakit saat menelan, makan, atau minum. Penggunaan obat penurunan demam juga disarankan untuk mengatasi demam yang dialami. '),
+(7, 6, 'Segera cari pertolongan medis bila melihat seseorang yang menunjukkan gejala epiglotitis. Penting diingat, jangan membaringkan penderita dalam posisi telentang atau memeriksa tenggorokannya tanpa didampingi petugas medis. Hal tersebut justru dapat memperburuk kondisi penderita.'),
+(8, 6, 'Epiglotitis harus diobati secepatnya. Jika tidak, epiglotis yang membengkak bisa menutupi batang tenggorokan sehingga menghambat pasokan oksigen. Kondisi tersebut bisa menyebabkan kematian.'),
+(9, 7, 'Epiglotitis harus diobati secepatnya. Jika tidak, epiglotis yang membengkak bisa menutupi batang tenggorokan sehingga menghambat pasokan oksigen. Kondisi tersebut bisa menyebabkan kematian.'),
+(10, 7, 'Pleuritis yang disebabkan oleh virus dapat sembuh dalam beberapa hari dengan istirahat yang cukup sehingga obat-obatan antivirus tidak diperlukan. Sementara itu, operasi dapat dilakukan pada pleuritis yang disebabkan oleh kanker paru-paru. Operasi bertujuan untuk mengangkat sebagian atau seluruh organ paru-paru. Selain operasi, radioterapi atau kemoterapi juga dapat dilakukan untuk menangani kanker paru'),
+(11, 8, 'Pada dasarnya, tidak ada obat yang bisa melawan virus penyebab common cold atau selesma. Artinya, common cold biasanya akan sembuh dengan sendirinya. Obat pilek dan batuk yang ada biasanya hanya digunakan untuk meredakan gejala yang Anda rasakan, seperti hidung tersumbat, demam, dan sakit kepala.'),
+(12, 8, 'Beberapa obat yang biasa digunakan antara lain obat dekongestan untuk melegakan hidung tersumbat serta paracetamol atau ibuprofen untuk menurunkan panas dan meredakan nyeri.'),
+(13, 9, 'Anda perlu mengkarantina diri dan tetap di rumah untuk menghindari kontak dengan orang lain.'),
+(14, 9, 'Kebanyakan penderita penyakit influenza mengalami gejala ringan dan tidak memerlukan rawat inap atau obat antivirus. Namun, jika gejala Anda memburuk, segera cari pertolongan medis.');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `symptoms`
 --
 
 CREATE TABLE `symptoms` (
@@ -167,7 +199,7 @@ CREATE TABLE `symptoms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `symptoms`
+-- Dumping data untuk tabel `symptoms`
 --
 
 INSERT INTO `symptoms` (`symptom_id`, `name`, `certainty`) VALUES
@@ -205,7 +237,7 @@ INSERT INTO `symptoms` (`symptom_id`, `name`, `certainty`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -216,7 +248,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`user_id`, `role`, `username`, `password`) VALUES
@@ -224,57 +256,71 @@ INSERT INTO `user` (`user_id`, `role`, `username`, `password`) VALUES
 (2, 1, 'adi', '$2y$10$ge9myh0TIg1tGwsOm6KZ5eriUxWhYswmHFx84dEsrwx'),
 (11, 1, 'ari', '$2y$10$AMqONb9QD9COW1/9VmNwyOCo3eLFl/AUxQwGTMhwYor'),
 (17, 1, 'geats', '$2y$10$oe2igmq7Gfq0KKmPEJo3UOD4xmgduzkY..WSK6JmlRWn.6uvQELl6'),
-(18, 1, 'user', '$2y$10$vpoR1U./.6R64PcnZ26qn.Y5A6S87SzjG6uCEfGe9MVdQvHtd7ETS');
+(18, 1, 'user', '$2y$10$vpoR1U./.6R64PcnZ26qn.Y5A6S87SzjG6uCEfGe9MVdQvHtd7ETS'),
+(19, 1, 'hit', '$2y$10$w/A2kX7tX.oWvnc7Hx1UK.GtuT7tw99htRyHdWbZYZ13fgNuygAVi');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `diseases`
+-- Indeks untuk tabel `diseases`
 --
 ALTER TABLE `diseases`
   ADD PRIMARY KEY (`disease_id`);
 
 --
--- Indexes for table `diseases_symptoms`
+-- Indeks untuk tabel `diseases_symptoms`
 --
 ALTER TABLE `diseases_symptoms`
   ADD KEY `disease_id` (`disease_id`),
   ADD KEY `symptom_id` (`symptom_id`);
 
 --
--- Indexes for table `symptoms`
+-- Indeks untuk tabel `solusi`
+--
+ALTER TABLE `solusi`
+  ADD PRIMARY KEY (`solusi_id`),
+  ADD KEY `disease_id` (`disease_id`);
+
+--
+-- Indeks untuk tabel `symptoms`
 --
 ALTER TABLE `symptoms`
   ADD PRIMARY KEY (`symptom_id`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `diseases_symptoms`
+-- Ketidakleluasaan untuk tabel `diseases_symptoms`
 --
 ALTER TABLE `diseases_symptoms`
   ADD CONSTRAINT `diseases_symptoms_ibfk_1` FOREIGN KEY (`disease_id`) REFERENCES `diseases` (`disease_id`),
   ADD CONSTRAINT `diseases_symptoms_ibfk_2` FOREIGN KEY (`symptom_id`) REFERENCES `symptoms` (`symptom_id`);
+
+--
+-- Ketidakleluasaan untuk tabel `solusi`
+--
+ALTER TABLE `solusi`
+  ADD CONSTRAINT `solusi_ibfk_1` FOREIGN KEY (`disease_id`) REFERENCES `diseases` (`disease_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

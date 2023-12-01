@@ -11,6 +11,18 @@ if (isset($_SESSION['role'])) {
 }
 
 $gejala = mysqli_query($koneksi, "SELECT * FROM symptoms");
+
+function maximum($list_penyakit) {
+    $max_penyakit_id = -1;
+    $max_certainty_penyakit = 0;
+    foreach($list_penyakit as $penyakit_id => $data_penyakit) {
+        if ($data_penyakit['certainty'] > $max_certainty_penyakit) {
+            $max_penyakit_id = $penyakit_id;
+            $max_certainty_penyakit = $data_penyakit['certainty'];
+        }
+    }
+    return $max_penyakit_id;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,63 +76,41 @@ $gejala = mysqli_query($koneksi, "SELECT * FROM symptoms");
         <div class="container">
             <div class="row">
                 <div class="col align-self-center">
-                    <h3 class="mb-4">Penyakit yang anda alami : </h3>
+                    <h3 class="mb-4">Persentase kemungkinan penyakit yang anda alami : </h3>
                     <?php
                         if(isset($_SESSION['hasil'])) {
                     ?>
                     <h5 class="mb-4">
                         <?php
-                            foreach($_SESSION['hasil'] as $penyakit => $persentase) {
+                            foreach($_SESSION['hasil'] as $penyakit_id => $data_penyakit) {
                         ?>
                         <div class="py-1">
                             <strong>
-                                <?= $penyakit ?> = <?= $persentase ?>%
+                                <?= $data_penyakit['name'] ?> = <?= $data_penyakit['certainty'] ?>%
                             </strong>
                         </div>
                         <?php } ?>
                         
                     </h5>
-                        <?php } ?>
-                        
-                        
+
+                    <h3 class="mb-4">Anda berkemungkinan besar mengalami penyakit
+                        <strong>
+                            <?= $_SESSION['hasil'][maximum($_SESSION['hasil'])]['name'] ?>
+                        </strong>
+                    </h3>
 
 
                     <h3 class="mb-4">Solusi untuk penyakit anda adalah : </h3>
                     <form action="" method="post" enctype="multipart/form-data" role="form">
                     <?php
-                        // function maximum($a, $b, $c, $d, $e, $f)
-                        // {
-                        //     $max = $a;
-                        //     $kode =1; 
-                        //     if ($b> $max) { 
-                        //         $max = $b;
-                        //         $kode = 2;
-                        //     } 
-                        //     if ($c > $max) { 
-                        //         $max = $c;
-                        //         $kode = 3;
-                        //     } 
-                        //     if ($d > $max) { 
-                        //         $max = $d;
-                        //         $kode = 4;
-                        //     } 
-                        //     if ($e > $max) { 
-                        //         $max = $e;
-                        //         $kode = 5;
-                        //     } 
-                        //     if ($f > $max) { 
-                        //         $max = $f;
-                        //         $kode = 6;
-                        //     } 
-                        //     return $kode;
-                        // }
-                        // $id_penyakit = maximum($_SESSION['ginjalAkut'], $_SESSION['ginjalKronis'], $_SESSION['batuGinjal'], $_SESSION['infeksiGinjal'], $_SESSION['kankerGinjal'], $_SESSION['gagalGinjal']);
-                        // $query = "SELECT * FROM solusi WHERE id_penyakit = '$id_penyakit'";
-                        // $data = mysqli_query($koneksi, $query);
-                        // while ($row = mysqli_fetch_array($data)) {
-                        //     echo '<p>' . $row['solusi'] . '</p>';
-                        // }
-                    ?>                    
+                        $id_penyakit = maximum($_SESSION['hasil']);
+                        $query = "SELECT * FROM solusi WHERE disease_id = '$id_penyakit'";
+                        $data = mysqli_query($koneksi, $query);
+                        while ($row = mysqli_fetch_array($data)) {
+                            echo '<p>' . $row['solusi'] . '</p>';
+                        }
+                    ?>   
+                    <?php } ?>                 
                     
                     
                 </div>

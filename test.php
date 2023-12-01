@@ -95,13 +95,33 @@ if (isset($_SESSION['role'])) {
                     <p class="mb-4">
                         Seberapa sering anda mengalami <?= strtolower($list_gejala[$idx_gejala]['name']); ?>?
                     </p>
-                    <input class="btn btn-primary mr-2 px-4 py-2" type="radio" name="answer" value="0">Tidak Pernah<br>
-                    <input class="btn btn-primary mr-2 px-4 py-2" type="radio" name="answer" value="0.2">Sangat Jarang<br>
-                    <input class="btn btn-primary mr-2 px-4 py-2" type="radio" name="answer" value="0.4">Jarang<br>
-                    <input class="btn btn-primary mr-2 px-4 py-2" type="radio" name="answer" value="0.6">Sering<br>
-                    <input class="btn btn-primary mr-2 px-4 py-2" type="radio" name="answer" value="0.8">Sangat Sering<br>
-                    <input class="btn btn-primary mr-2 px-4 py-2" type="radio" name="answer" value="1">Setiap Saat<br>
-                    <input type="submit" class="btn btn-primary mr-2 mt-3 px-4 py-2">
+                    <div>
+                        <input required class="btn btn-primary mr-2 px-4 py-2" type="radio" name="answer" value="0" id="ans_0">
+                        <label for="ans_0">Tidak Pernah</label>
+                    </div>
+                    <div>
+                        <input required class="btn btn-primary mr-2 px-4 py-2" type="radio" name="answer" value="0.2" id="ans_1">
+                        <label for="ans_1">Sangat Jarang</label>
+                    </div>
+                    <div>
+                        <input required class="btn btn-primary mr-2 px-4 py-2" type="radio" name="answer" value="0.4" id="ans_2">
+                        <label for="ans_2">Jarang</label>
+                    </div>
+                    <div>
+                        <input required class="btn btn-primary mr-2 px-4 py-2" type="radio" name="answer" value="0.6" id="ans_3">
+                        <label for="ans_3">Sering</label>
+                    </div>
+                    <div>
+                        <input required class="btn btn-primary mr-2 px-4 py-2" type="radio" name="answer" value="0.8" id="ans_4">
+                        <label for="ans_4">Sangat Sering</label>
+                    </div>
+                    <div>
+                        <input required class="btn btn-primary mr-2 px-4 py-2" type="radio" name="answer" value="1.0" id="ans_5">
+                        <label for="ans_5">Setiap Saat</label>
+                    </div>
+                    <div>
+                        <input required type="submit" class="btn btn-primary mr-2 mt-3 px-4 py-2">
+                    </div>
                     <?php
                         if(!isset($_SESSION['persentase'])) {
                             $_SESSION['persentase'] = [];
@@ -137,9 +157,13 @@ if (isset($_SESSION['role'])) {
                                         }
                                     }
                                 }
-                                $_SESSION['hasil'][$penyakit['name']] = $certainty_penyakit;
+                                $_SESSION['hasil'][$penyakit['disease_id']] = [
+                                    "name" => $penyakit['name'],
+                                    "certainty" => $certainty_penyakit
+                                ];
                             }
-                            header('Location:hasil.php');
+                            echo "here";
+                            header('Location: hasil.php');
                         }
 
                         $_SESSION['idx_gejala'] = $idx_gejala + 1;
