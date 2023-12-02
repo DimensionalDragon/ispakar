@@ -86,7 +86,7 @@ function maximum($list_penyakit) {
                         ?>
                         <div class="py-1">
                             <strong>
-                                <?= $data_penyakit['name'] ?> = <?= $data_penyakit['certainty'] ?>%
+                                <?= $data_penyakit['name'] ?> = <?= number_format(100 * $data_penyakit['certainty'], 2) ?>%
                             </strong>
                         </div>
                         <?php } ?>
@@ -109,6 +109,8 @@ function maximum($list_penyakit) {
                         while ($row = mysqli_fetch_array($data)) {
                             echo '<p>' . $row['solusi'] . '</p>';
                         }
+                        echo '<br>';
+                        echo '<br>';
                     ?>   
                     <?php } ?>                 
                     
