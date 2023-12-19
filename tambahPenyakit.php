@@ -10,7 +10,7 @@ if (isset($_SESSION['role'])) {
     header("location:index.php");
 }
 
-// $queryPenyakit = mysqli_query($koneksi, "SELECT * FROM penyakit");
+// $queryPenyakit = mysqli_query($koneksi, "SELECT * FROM diseases");
 // $query = mysqli_query($koneksi, "SELECT * FROM relasi INNER JOIN gejala ON relasi.id_gejala = gejala.id_gejala INNER JOIN penyakit ON relasi.id_penyakit = penyakit.id_penyakit WHERE id_gelaja = 1");
 // $data = mysqli_fetch_assoc($query);
 
@@ -37,7 +37,7 @@ if (isset($_SESSION['role'])) {
 <body >
     <div class="kiri">
         <section class="logo">
-            <img src="gambar/logo.png" alt="logo" height="70px" />
+            <img src="gambar/logo2.png" alt="logo" height="70px" />
         </section>
         <div class="sidebar-heading">
             <h5 class="font-weight-bold text-white text-uppercase teks">Data User</h5>
@@ -100,9 +100,9 @@ if (isset($_SESSION['role'])) {
             <select name="id_penyakit" id="id_penyakit" class="form-control">
                 <option value="">Pilih Penyakit Untuk Gejala</option>
 
-                <?php while ($penyakit = mysqli_fetch_assoc($queryPenyakit)) { ?>
+                <?php /*while ($penyakit = mysqli_fetch_assoc($queryPenyakit)) { ?>
                     <option value="<?= $penyakit["id_penyakit"]; ?>"><?= $penyakit["penyakit"]; ?></option>
-                <?php } ?>
+                <?php }*/ ?>
             </select>
         </div> -->
         <input type="submit" name="tambah_btn" id="tambah" class="btn btn-primary" value="Tambah">

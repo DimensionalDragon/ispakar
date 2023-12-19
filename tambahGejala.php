@@ -10,7 +10,7 @@ if (isset($_SESSION['role'])) {
     header("location:index.php");
 }
 
-$queryPenyakit = mysqli_query($koneksi, "SELECT * FROM penyakit");
+$queryPenyakit = mysqli_query($koneksi, "SELECT * FROM diseases");
 
 ?>
 
@@ -91,14 +91,18 @@ $queryPenyakit = mysqli_query($koneksi, "SELECT * FROM penyakit");
     <form action="function.php?act=tambahGejala" id="tambah" method="POST" >
         <div class="form-group">
             <label for="namaGejala">Gejala</label>
-            <input type="text" class="form-control" id="namaGejala" name="namaGejala"  placeholder="Masukkan gejala">
+            <input required type="text" class="form-control" id="namaGejala" name="namaGejala"  placeholder="Masukkan gejala">
+        </div>
+        <div class="form-group">
+            <label for="bobotGejala">Bobot Gejala</label>
+            <input required type="number" min=0 max=1 step="0.01" class="form-control" id="bobotGejala" name="bobotGejala"  placeholder="Masukkan bobot gejala">
         </div>
         <div class="form-group">
             <label for="id_penyakit" class="form-label">Nama Penyakit</label>
-            <select name="id_penyakit" id="id_penyakit" class="form-control">
+            <select required name="id_penyakit" id="id_penyakit" class="form-control">
                 <option value="">Pilih Penyakit dari Gejala</option>
                 <?php while ($penyakit = mysqli_fetch_assoc($queryPenyakit)) { ?>
-                    <option value="<?= $penyakit["id_penyakit"]; ?>"><?= $penyakit["penyakit"]; ?></option>
+                    <option value="<?= $penyakit["disease_id"]; ?>"><?= $penyakit["name"]; ?></option>
                 <?php } ?>
             </select>
         </div>

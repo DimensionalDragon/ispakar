@@ -14,42 +14,42 @@ if (isset($_GET["act"])) {
         login();
     // } else if ($act == "registerPakar") {
     //     registerPakar();
-    // } else if ($act == "tambahGejala") {
-    //     tambahGejala();
-    // } else if ($act == "tambahPenyakit") {
-    //     tambahPenyakit();
-    // } else if ($act == "tambahSolusi") {
-    //     tambahSolusi();
-    // } else if ($act == "hapusGejala") {
-    //     $id_gejala = $_GET["id_gejala"];
-    //     hapusGejala($id_gejala);
-    // } else if ($act == "hapusPenyakit") {
-    //     $id_penyakit = $_GET["id_penyakit"];
-    //     hapusPenyakit($id_penyakit);
-    // } else if ($act == "hapusPasien") {
-    //     $id_user = $_GET["id_user"];
-    //     hapusPasien($id_user);
+    } else if ($act == "tambahGejala") {
+        tambahGejala();
+    } else if ($act == "tambahPenyakit") {
+        tambahPenyakit();
+    } else if ($act == "tambahSolusi") {
+        tambahSolusi();
+    } else if ($act == "hapusGejala") {
+        $id_gejala = $_GET["id_gejala"];
+        hapusGejala($id_gejala);
+    } else if ($act == "hapusPenyakit") {
+        $id_penyakit = $_GET["id_penyakit"];
+        hapusPenyakit($id_penyakit);
+    } else if ($act == "hapusPasien") {
+        $id_user = $_GET["id_user"];
+        hapusPasien($id_user);
     // } else if ($act == "hapusPakar") {
     //     $id_user = $_GET["id_user"];
     //     hapusPakar($id_user);
-    // } else if ($act == "hapusSolusi") {
-    //     $id_solusi = $_GET["id_solusi"];
-    //     hapusSolusi($id_solusi);
-    // } else if ($act == "ubahGejala") {
-    //     $id_gejala = $_GET["id_gejala"];
-    //     ubahGejala($id_gejala);
+    } else if ($act == "hapusSolusi") {
+        $id_solusi = $_GET["id_solusi"];
+        hapusSolusi($id_solusi);
+    } else if ($act == "ubahGejala") {
+        $id_gejala = $_GET["id_gejala"];
+        ubahGejala($id_gejala);
     // } else if ($act == "ubahPasien") {
     //     $id_user = $_GET["id_user"];
     //     ubahPasien($id_user);
     // } else if ($act == "ubahPakar") {
     //     $id_user = $_GET["id_user"];
     //     ubahPakar($id_user);
-    // } else if ($act == "ubahPenyakit") {
-    //     $id_penyakit = $_GET["id_penyakit"];
-    //     ubahPenyakit($id_penyakit);
-    // } else if ($act == "ubahSolusi") {
-    //     $id_solusi = $_GET["id_solusi"];
-    //     ubahSolusi($id_solusi);
+    } else if ($act == "ubahPenyakit") {
+        $id_penyakit = $_GET["id_penyakit"];
+        ubahPenyakit($id_penyakit);
+    } else if ($act == "ubahSolusi") {
+        $id_solusi = $_GET["id_solusi"];
+        ubahSolusi($id_solusi);
     } else if($act == "ulang"){
         ulang();
     }
@@ -126,21 +126,27 @@ function login() {
                 </script>";
     }
 }
-/*
+
 function tambahGejala()
 {
     global $koneksi;
-    $gejala = htmlspecialchars($_POST['namaGejala']);
+    $queryGejala = "SELECT MAX(symptom_id) AS latest_id FROM symptoms";
+    $hasilGejala = mysqli_query($koneksi, $queryGejala);
+    $gejala = mysqli_fetch_assoc($hasilGejala);
+    $nextId = intval($gejala['latest_id']) + 1;
+
+    $inputGejala = htmlspecialchars($_POST['namaGejala']);
+    $inputBobotGejala = floatval($_POST['bobotGejala']);
     $id_penyakit = htmlspecialchars($_POST['id_penyakit']);
-    $queryGejala = "INSERT INTO gejala VALUES ('','$gejala')";
+    $queryGejala = "INSERT INTO symptoms VALUES ($nextId, '$inputGejala', $inputBobotGejala)";
     
     $exe = mysqli_query($koneksi, $queryGejala);
     
     if (!$exe) {
         die('Error pada database');
     }   
-        $id_gejala = mysqli_insert_id($koneksi);
-        $queryRelasi = "INSERT INTO relasi VALUES ('', '$id_gejala', '$id_penyakit')";
+        $id_gejala = $nextId;
+        $queryRelasi = "INSERT INTO diseases_symptoms VALUES ('$id_penyakit', '$id_gejala')";
         $ex = mysqli_query($koneksi, $queryRelasi);
 
         if(!$ex){
@@ -151,31 +157,38 @@ function tambahGejala()
         document.location.href = 'indexGejala.php'</script>";
 }
 
-
 function tambahPenyakit()
 {
     global $koneksi;
-    $penyakit = htmlspecialchars($_POST['namaPenyakit']);
-    // $penyakit = $_POST['id_penyakit'];
-    $queryPenyakit = "INSERT INTO penyakit VALUES ('','$penyakit')";
-    // $queryRelasi = "INSERT INTO relasi VALUES ('', '')"
-    $exe = mysqli_query($koneksi, $queryPenyakit);
+    $queryPenyakit = "SELECT MAX(disease_id) AS latest_id FROM diseases";
+    $hasilPenyakit = mysqli_query($koneksi, $queryPenyakit);
+    $penyakit = mysqli_fetch_assoc($hasilPenyakit);
+    $nextId = intval($penyakit['latest_id']) + 1;
+    
+    $inputPenyakit = htmlspecialchars($_POST['namaPenyakit']);
+    $queryTambahPenyakit = "INSERT INTO diseases VALUES ($nextId, '$inputPenyakit')";
+    $exe = mysqli_query($koneksi, $queryTambahPenyakit);
     if (!$exe) {
         die('Error pada database');
     }
-            echo "<script>
-            alert('Penyakit berhasil ditambahkan');
-            document.location.href = 'indexPenyakit.php'</script>";
+    echo "
+    <script>
+        alert('Penyakit berhasil ditambahkan');
+        document.location.href = 'indexPenyakit.php';
+    </script>";
 }
 
 function tambahSolusi()
 {
     global $koneksi;
-    $solusi = htmlspecialchars($_POST['namaSolusi']);
+    $querySolusi = "SELECT MAX(solusi_id) AS latest_id FROM solusi";
+    $hasilSolusi = mysqli_query($koneksi, $querySolusi);
+    $solusi = mysqli_fetch_assoc($hasilSolusi);
+    $nextId = intval($solusi['latest_id']) + 1;
+
+    $inputSolusi = htmlspecialchars($_POST['namaSolusi']);
     $id_penyakit = htmlspecialchars($_POST['id_penyakit']);
-    // $penyakit = $_POST['id_penyakit'];
-    $querySolusi = "INSERT INTO solusi VALUES ('', '$id_penyakit', '$solusi')";
-    // $queryRelasi = "INSERT INTO relasi VALUES ('', '')"
+    $querySolusi = "INSERT INTO solusi VALUES ($nextId, '$id_penyakit', '$inputSolusi')";
     $exe = mysqli_query($koneksi, $querySolusi);
     if (!$exe) {
         die('Error pada database');
@@ -190,12 +203,14 @@ function ubahGejala($id_gejala)
     global $koneksi;
     $id_penyakit = htmlspecialchars($_POST['id_penyakit']);
     $gejala = htmlspecialchars($_POST['namaGejala']);
-    $queryGejala = "UPDATE gejala SET gejala = '$gejala' WHERE id_gejala = '$id_gejala'";
+    $bobotGejala = floatval($_POST['bobotGejala']);
+
+    $queryGejala = "UPDATE symptoms SET name = '$gejala', certainty = $bobotGejala WHERE symptom_id = '$id_gejala'";
     $exe = mysqli_query($koneksi, $queryGejala);
     if (!$exe) {
         die('Error pada database');
     }
-        $queryRelasi = "UPDATE relasi SET id_gejala = '$id_gejala', id_penyakit = '$id_penyakit' WHERE id_gejala = '$id_gejala'";
+        $queryRelasi = "UPDATE diseases_symptoms SET symptom_id = '$id_gejala', disease_id = '$id_penyakit' WHERE symptom_id = '$id_gejala'";
         $ex = mysqli_query($koneksi, $queryRelasi);
         if(!$ex){
             die('Error pada database');
@@ -210,9 +225,7 @@ function ubahSolusi($id_solusi)
     global $koneksi;
     $solusi = htmlspecialchars($_POST['namaSolusi']);
     $id_penyakit = htmlspecialchars($_POST['id_penyakit']);
-    // $penyakit = $_POST['id_penyakit'];
-    $querySolusi = "UPDATE solusi SET solusi = '$solusi', id_penyakit = '$id_penyakit' WHERE id_solusi = '$id_solusi'";
-    // $queryRelasi = "INSERT INTO relasi VALUES ('', '')"
+    $querySolusi = "UPDATE solusi SET solusi = '$solusi', disease_id = '$id_penyakit' WHERE solusi_id = '$id_solusi'";
     $exe = mysqli_query($koneksi, $querySolusi);
     if (!$exe) {
         die('Error pada database');
@@ -226,18 +239,16 @@ function ubahPenyakit($id_penyakit)
 {
     global $koneksi;
     $penyakit = htmlspecialchars($_POST['namaPenyakit']);
-    // $penyakit = $_POST['id_penyakit'];
-    $queryPenyakit = "UPDATE penyakit SET penyakit = '$penyakit' WHERE id_penyakit = '$id_penyakit'";
-    // $queryRelasi = "INSERT INTO relasi VALUES ('', '')"
+    $queryPenyakit = "UPDATE diseases SET name = '$penyakit' WHERE disease_id = '$id_penyakit'";
     $exe = mysqli_query($koneksi, $queryPenyakit);
     if (!$exe) {
         die('Error pada database');
     }
-            echo "<script>
-            alert('Data Penyakit berhasil diubah!');
-            document.location.href = 'indexPenyakit.php'</script>";
+    echo "<script>
+    alert('Data Penyakit berhasil diubah!');
+    document.location.href = 'indexPenyakit.php'</script>";
 }
-
+/*
 function ubahPasien($id_user)
 {
     global $koneksi;
@@ -276,11 +287,12 @@ function ubahPakar($id_user)
             document.location.href = 'indexPakar.php'</script>";
 }
 
-
+*/
 function hapusGejala($id_gejala)
 {
     global $koneksi;
-    mysqli_query($koneksi, "DELETE FROM gejala WHERE id_gejala = $id_gejala");
+    mysqli_query($koneksi, "DELETE FROM diseases_symptoms WHERE symptom_id = $id_gejala");
+    mysqli_query($koneksi, "DELETE FROM symptoms WHERE symptom_id = $id_gejala");
     $result = mysqli_affected_rows($koneksi);
     if ($result > 0) {
         echo "
@@ -302,7 +314,7 @@ function hapusGejala($id_gejala)
 function hapusPasien($id_user)
 {
     global $koneksi;
-    mysqli_query($koneksi, "DELETE FROM user WHERE id_user = $id_user");
+    mysqli_query($koneksi, "DELETE FROM user WHERE user_id = $id_user");
     $result = mysqli_affected_rows($koneksi);
     if ($result > 0) {
         echo "
@@ -320,7 +332,7 @@ function hapusPasien($id_user)
         ";
     }
 }
-
+/*
 function hapusPakar($id_user)
 {
     global $koneksi;
@@ -342,25 +354,25 @@ function hapusPakar($id_user)
         ";
     }
 }
-
+*/
 function hapusPenyakit($id_penyakit)
 {
     global $koneksi;
-    mysqli_query($koneksi, "DELETE FROM penyakit WHERE id_penyakit = $id_penyakit");
+    mysqli_query($koneksi, "DELETE FROM diseases WHERE disease_id = $id_penyakit");
     $result = mysqli_affected_rows($koneksi);
     if ($result > 0) {
         echo "
         <script>
-                alert('Penyakit berhasil dihapus!');
-                document.location.href = 'indexPenyakit.php';
-            </script>	
+            alert('Penyakit berhasil dihapus!');
+            document.location.href = 'indexPenyakit.php';
+        </script>	
         ";
     } else {
         echo "
         <script>
-                    alert('Penyakit gagal dihapus, karena masih terikat dengan gejala!');
-                    document.location.href = 'indexPenyakit.php';
-            </script>	
+            alert('Penyakit gagal dihapus, karena masih terikat dengan gejala!');
+            document.location.href = 'indexPenyakit.php';
+        </script>
         ";
     }
 }
@@ -368,7 +380,7 @@ function hapusPenyakit($id_penyakit)
 function hapusSolusi($id_solusi)
 {
     global $koneksi;
-    mysqli_query($koneksi, "DELETE FROM solusi WHERE id_solusi = $id_solusi");
+    mysqli_query($koneksi, "DELETE FROM solusi WHERE solusi_id = $id_solusi");
     $result = mysqli_affected_rows($koneksi);
     if ($result > 0) {
         echo "
@@ -385,7 +397,7 @@ function hapusSolusi($id_solusi)
             </script>	
         ";
     }
-}*/
+}
 
 function gejala($id_penyakit){
     global $koneksi;

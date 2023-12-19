@@ -12,16 +12,16 @@ if (isset($_SESSION['role'])) {
 
 $queryPasien = mysqli_query($koneksi, "SELECT * FROM user WHERE role = '1'");
 
-$jumlahPasien = mysqli_query($koneksi, "SELECT COUNT('id_user') as jml_pasien FROM user WHERE role='1'");
+$jumlahPasien = mysqli_query($koneksi, "SELECT COUNT('user_id') as patients_count FROM user WHERE role='1'");
 $pasien = mysqli_fetch_assoc($jumlahPasien);
 
-$jumlahPenyakit = mysqli_query($koneksi, "SELECT COUNT('id_penyakit') as jml_penyakit FROM penyakit");
+$jumlahPenyakit = mysqli_query($koneksi, "SELECT COUNT('disease_id') as diseases_count FROM diseases");
 $penyakit = mysqli_fetch_assoc($jumlahPenyakit);
 
-$jumlahGejala = mysqli_query($koneksi, "SELECT COUNT('id_gejala') as jml_gejala FROM gejala");
+$jumlahGejala = mysqli_query($koneksi, "SELECT COUNT('symptom_id') as symptoms_count FROM symptoms");
 $gejala = mysqli_fetch_assoc($jumlahGejala);
 
-$jumlahSolusi = mysqli_query($koneksi, "SELECT COUNT('id_solusi') as jml_solusi FROM solusi");
+$jumlahSolusi = mysqli_query($koneksi, "SELECT COUNT('solusi_id') as solutions_count FROM solusi");
 $solusi = mysqli_fetch_assoc($jumlahSolusi);
 
 
@@ -47,7 +47,7 @@ $solusi = mysqli_fetch_assoc($jumlahSolusi);
 <body >
     <div class="kiri">
         <section class="logo">
-            <img src="gambar/logo1.png" alt="logo" height="70px" />
+            <img src="gambar/logo2.png" alt="logo" height="70px" />
         </section>
         <div class="sidebar-heading">
             <h5 class="font-weight-bold text-white text-uppercase teks">Gejala & Penyakit</h5> 
@@ -81,7 +81,7 @@ $solusi = mysqli_fetch_assoc($jumlahSolusi);
     <div class="container-fluid">
 
 <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="pt-4 d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
     </div>
 
@@ -95,7 +95,7 @@ $solusi = mysqli_fetch_assoc($jumlahSolusi);
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Data Pasien</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $pasien['jml_pasien']; ?></div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $pasien['patients_count']; ?></div>
                 </div>
             </div>
         </div>
@@ -109,7 +109,7 @@ $solusi = mysqli_fetch_assoc($jumlahSolusi);
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Data Penyakit</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $penyakit['jml_penyakit']; ?></div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $penyakit['diseases_count']; ?></div>
                 </div>
             </div>
         </div>
@@ -122,7 +122,7 @@ $solusi = mysqli_fetch_assoc($jumlahSolusi);
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Data Gejala</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $gejala['jml_gejala']; ?></div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $gejala['symptoms_count']; ?></div>
                 </div>
             </div>
         </div>
@@ -135,7 +135,7 @@ $solusi = mysqli_fetch_assoc($jumlahSolusi);
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Data Solusi</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $solusi['jml_solusi']; ?></div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $solusi['solutions_count']; ?></div>
                 </div>
             </div>
         </div>
@@ -156,10 +156,6 @@ $solusi = mysqli_fetch_assoc($jumlahSolusi);
                         echo'<th>Aksi</th>';
                         }?>
                         <th>Aksi</th>
-                        <th>Nama</th>
-                        <th>Email</th>
-                        <th>Alamat</th>
-                        <th>Tgl Lahir</th>
                         <th>Username</th>
                     </tr>
                 </thead>
@@ -167,14 +163,10 @@ $solusi = mysqli_fetch_assoc($jumlahSolusi);
                 <?php while ($data = mysqli_fetch_assoc($queryPasien)) { ?>
                 <tr>
                     <td>
-                    <a class="badge badge-pill badge-primary" href="ubahPasien.php?id_user=<?php echo $data["id_user"]; ?>">edit</a> |
-                    <a href="function.php?act=hapusPasien&id_user=<?= $data["id_user"]; ?>" onclick="return confirm('Yakin ingin menghapus data?');" class="badge badge-pill badge-danger">hapus</a>
+                    <!-- <a class="badge badge-pill badge-primary" href="ubahPasien.php?id_user=<?php echo $data["user_id"]; ?>">edit</a> | -->
+                    <a href="function.php?act=hapusPasien&id_user=<?= $data["user_id"]; ?>" onclick="return confirm('Yakin ingin menghapus data?');" class="badge badge-pill badge-danger">Hapus</a>
                     </td>
-                    <td><?= $data['nama']; ?></td>
-                    <td><?= $data['email']; ?></td>
-                    <td><?= $data['alamat']; ?></td>
-                    <td><?= $data['tgl_lahir']; ?></td>
-                    <td><?= $data['nama']; ?></td>
+                    <td><?= $data['username']; ?></td>
                 </tr>
                 <?php } ?>
             </tbody>

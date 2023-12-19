@@ -11,7 +11,7 @@ if (isset($_SESSION['role'])) {
 }
 
 
-$queryPenyakit = mysqli_query($koneksi, "SELECT * FROM penyakit");
+$queryPenyakit = mysqli_query($koneksi, "SELECT * FROM diseases");
 
 ?>
 
@@ -99,7 +99,7 @@ $queryPenyakit = mysqli_query($koneksi, "SELECT * FROM penyakit");
             <select name="id_penyakit" id="id_penyakit" class="form-control">
                 <option value="">Pilih Penyakit dari Solusi</option>
                 <?php while ($penyakit = mysqli_fetch_assoc($queryPenyakit)) { ?>
-                    <option value="<?= $penyakit["id_penyakit"]; ?>"><?= $penyakit["penyakit"]; ?></option>
+                    <option value="<?= $penyakit["disease_id"]; ?>"><?= $penyakit["name"]; ?></option>
                 <?php } ?>
             </select>
         </div>

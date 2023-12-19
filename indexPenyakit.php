@@ -10,18 +10,18 @@ if (isset($_SESSION['role'])) {
     header("location:index.php");
 }
 
-$queryPenyakit = mysqli_query($koneksi, "SELECT * FROM penyakit");
+$queryPenyakit = mysqli_query($koneksi, "SELECT * FROM diseases");
 
-$jumlahPasien = mysqli_query($koneksi, "SELECT COUNT('id_user') as jml_pasien FROM user WHERE role='1'");
+$jumlahPasien = mysqli_query($koneksi, "SELECT COUNT('user_id') as jml_pasien FROM user WHERE role='1'");
 $pasien = mysqli_fetch_assoc($jumlahPasien);
 
-$jumlahPenyakit = mysqli_query($koneksi, "SELECT COUNT('id_penyakit') as jml_penyakit FROM penyakit");
+$jumlahPenyakit = mysqli_query($koneksi, "SELECT COUNT('disease_id') as jml_penyakit FROM diseases");
 $penyakit = mysqli_fetch_assoc($jumlahPenyakit);
 
-$jumlahGejala = mysqli_query($koneksi, "SELECT COUNT('id_gejala') as jml_gejala FROM gejala");
+$jumlahGejala = mysqli_query($koneksi, "SELECT COUNT('symptom_id') as jml_gejala FROM symptoms");
 $gejala = mysqli_fetch_assoc($jumlahGejala);
 
-$jumlahSolusi = mysqli_query($koneksi, "SELECT COUNT('id_solusi') as jml_solusi FROM solusi");
+$jumlahSolusi = mysqli_query($koneksi, "SELECT COUNT('solusi_id') as jml_solusi FROM solusi");
 $solusi = mysqli_fetch_assoc($jumlahSolusi);
 
 
@@ -48,7 +48,7 @@ $solusi = mysqli_fetch_assoc($jumlahSolusi);
 <body >
     <div class="kiri">
         <section class="logo">
-            <img src="gambar/logo.png" alt="logo" height="70px" />
+            <img src="gambar/logo2.png" alt="logo" height="70px" />
         </section>
         <div class="sidebar-heading">
             <h5 class="font-weight-bold text-white text-uppercase teks">Data User</h5>
@@ -57,10 +57,10 @@ $solusi = mysqli_fetch_assoc($jumlahSolusi);
             <a class="nav-link" href="indexAdmin.php">
             <span>Data Pasien</span></a>
         </section>
-        <section class="isi">
+        <!-- <section class="isi">
             <a class="nav-link" href="indexPakar.php">
             <span>Data Pakar</span></a>
-        </section>
+        </section> -->
         <div class="sidebar-heading">
             <h5 class="font-weight-bold text-white text-uppercase teks">Gejala & Penyakit</h5> 
         </div>
@@ -173,11 +173,11 @@ $solusi = mysqli_fetch_assoc($jumlahSolusi);
                     <?php while ($data = mysqli_fetch_assoc($queryPenyakit)) { ?>
                     <tr>
                         <td>
-                        <a class="badge badge-pill badge-primary" href="ubahPenyakit.php?id_penyakit=<?php echo $data["id_penyakit"]; ?>">edit</a> |
-                        <a href="function.php?act=hapusPenyakit&id_penyakit=<?= $data['id_penyakit']; ?>" onclick="return confirm('Yakin ingin menghapus data?');" class="badge badge-pill badge-danger">hapus</a>
+                        <a class="badge badge-pill badge-primary" href="ubahPenyakit.php?id_penyakit=<?php echo $data["disease_id"]; ?>">Edit</a> |
+                        <a href="function.php?act=hapusPenyakit&id_penyakit=<?= $data['disease_id']; ?>" onclick="return confirm('Yakin ingin menghapus data?');" class="badge badge-pill badge-danger">Hapus</a>
                         </td>
-                        <td><?= $data['id_penyakit']; ?></td>
-                        <td><?= $data['penyakit']; ?></td>
+                        <td><?= $data['disease_id']; ?></td>
+                        <td><?= $data['name']; ?></td>
                     </tr>
                     <?php } ?>
                 </tbody>

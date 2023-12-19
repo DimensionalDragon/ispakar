@@ -12,9 +12,9 @@ if (isset($_SESSION['role'])) {
 
 $id_gejala = $_GET["id_gejala"];
 
-$queryPenyakit = mysqli_query($koneksi, "SELECT * FROM penyakit");
+$queryPenyakit = mysqli_query($koneksi, "SELECT * FROM diseases");
 
-$query = mysqli_query($koneksi, "SELECT * FROM relasi INNER JOIN penyakit ON relasi.id_penyakit = penyakit.id_penyakit INNER JOIN gejala ON relasi.id_gejala = gejala.id_gejala WHERE relasi.id_gejala = '$id_gejala'");
+$query = mysqli_query($koneksi, "SELECT symptoms.symptom_id AS symptom_id, diseases.disease_id AS disease_id, diseases.name AS disease, symptoms.name AS symptom, certainty FROM diseases_symptoms INNER JOIN diseases ON diseases_symptoms.disease_id = diseases.disease_id INNER JOIN symptoms ON diseases_symptoms.symptom_id = symptoms.symptom_id WHERE diseases_symptoms.symptom_id = '$id_gejala'");
 $data = mysqli_fetch_assoc($query);
 
 
@@ -41,7 +41,7 @@ $data = mysqli_fetch_assoc($query);
 <body >
     <div class="kiri">
         <section class="logo">
-            <img src="gambar/logo.png" alt="logo" height="70px" />
+            <img src="gambar/logo2.png" alt="logo" height="70px" />
         </section>
         <div class="sidebar-heading">
             <h5 class="font-weight-bold text-white text-uppercase teks">Data User</h5>
@@ -93,17 +93,21 @@ $data = mysqli_fetch_assoc($query);
         <!-- Content Row -->
             <div class="row">
 
-                <form action="function.php?act=ubahGejala&id_gejala=<?= $data['id_gejala']; ?>" id="ubah" method="POST">
+                <form action="function.php?act=ubahGejala&id_gejala=<?= $data['symptom_id']; ?>" id="ubah" method="POST">
                     <div class="form-group">
                         <label for="namaGejala">Nama Gejala</label>
-                        <input type="text" class="form-control" id="namaGejala" name="namaGejala" value="<?= $data['gejala']; ?>"">
+                        <input type="text" class="form-control" id="namaGejala" name="namaGejala" value="<?= $data['symptom']; ?>"">
+                    </div>
+                    <div class="form-group">
+                        <label for="bobotGejala">Bobot Gejala</label>
+                        <input type="number" max=1 min=0 step=0.01 class="form-control" id="bobotGejala" name="bobotGejala" value="<?= $data['certainty']; ?>"">
                     </div>
                     <div class="form-group">
                     <label for="id_penyakit" class="form-label">Nama Penyakit</label>
                     <select name="id_penyakit" id="id_penyakit" class="form-control">
-                        <option value="<?= $data['id_penyakit']; ?>"><?= $data['penyakit']; ?></option>
+                        <option value="<?= $data['disease_id']; ?>"><?= $data['disease']; ?></option>
                         <?php while ($penyakit = mysqli_fetch_assoc($queryPenyakit)) { ?>
-                            <option value="<?= $penyakit["id_penyakit"]; ?>"><?= $penyakit["penyakit"]; ?></option>
+                            <option value="<?= $penyakit["disease_id"]; ?>"><?= $penyakit["name"]; ?></option>
                         <?php } ?>
                     </select>
                 </div>

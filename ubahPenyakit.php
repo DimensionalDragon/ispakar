@@ -12,7 +12,7 @@ if (isset($_SESSION['role'])) {
 
 $id_penyakit = $_GET["id_penyakit"];
 
-$queryPenyakit = mysqli_query($koneksi, "SELECT * FROM penyakit WHERE id_penyakit = '$id_penyakit'");
+$queryPenyakit = mysqli_query($koneksi, "SELECT * FROM diseases WHERE disease_id = '$id_penyakit'");
 $penyakit = mysqli_fetch_assoc($queryPenyakit);
 ?>
 
@@ -89,10 +89,10 @@ $penyakit = mysqli_fetch_assoc($queryPenyakit);
         <!-- Content Row -->
             <div class="row">
 
-                <form action="function.php?act=ubahPenyakit&id_penyakit=<?= $penyakit['id_penyakit']; ?>" id="ubah" method="POST">
+                <form action="function.php?act=ubahPenyakit&id_penyakit=<?= $penyakit['disease_id']; ?>" id="ubah" method="POST">
                     <div class="form-group">
                         <label for="namaPenyakit">Nama Penyakit</label>
-                        <input type="text" class="form-control" id="namaPenyakit" name="namaPenyakit" value="<?= $penyakit['penyakit']; ?>"">
+                        <input type="text" class="form-control" id="namaPenyakit" name="namaPenyakit" value="<?= $penyakit['name']; ?>"">
                     </div>
                     
                     <input type="submit" name="ubah_btn" id="ubah" class="btn btn-primary" value="Ubah">
